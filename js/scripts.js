@@ -18,32 +18,21 @@ if (navigator.geolocation) {
   });
 }
 
-$.document.ready(function() {
-  $.getJSON(weatherAPI, function(){
-    console.log(JSON.stringify(json));
-  });
-});
+var request = new XMLHttpRequest();
+request.open('GET', weatherAPI, true);
 
-// var request = new XMLHttpRequest();
-// request.open('GET', weatherAPI, true);
-// request.send();
-// data = request.responseText;
+request.onload = function() {
+  if (request.status >= 200 && request.status < 400) {
+    // Success!
+    var data = JSON.parse(request.responseText);
+  } else {
+    // We reached our target server, but it returned an error
 
-// request.onload = function() {
-//   if (request.status >= 200 && request.status < 400) {
-//     // Success!
-//     // var data = request.responseText;
-//   } else {
-//     // We reached our target server, but it returned an error
-//
-//   }
-// };
-//
-// request.onerror = function() {
-//   // There was a connection error of some sort
-// };
+  }
+};
 
-// request.send();
-// var data = request.responseText;
-//
-// console.log(data);
+request.onerror = function() {
+  // There was a connection error of some sort
+};
+
+request.send();
