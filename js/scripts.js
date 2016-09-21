@@ -24,7 +24,7 @@ request.open('GET', weatherAPI, true);
 request.onload = function() {
   if (request.status >= 200 && request.status < 400) {
     // Success!
-    var data = JSON.parse(request.responseText);
+    var data = JSON.parse(JSON.stringify(request.responseText));
   } else {
     // We reached our target server, but it returned an error
 
