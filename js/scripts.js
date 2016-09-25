@@ -18,21 +18,28 @@ if (navigator.geolocation) {
   });
 }
 
-var request = new XMLHttpRequest();
-request.open('GET', weatherAPI, true);
-
-request.onload = function() {
-  if (request.status >= 200 && request.status < 400) {
-    // Success!
-    var data = JSON.parse(JSON.stringify(request.responseText));
-  } else {
-    // We reached our target server, but it returned an error
-
+// var request = new XMLHttpRequest();
+// request.open('GET', weatherAPI, false);
+// request.send();
+// request = JSON.parse(request.response);
+// request.onload = function() {
+//   if (request.status >= 200 && request.status < 400) {
+//     // Success!
+//   } else {
+//     // We reached our target server, but it returned an error
+//   }
+// };
+//
+// request.onerror = function() {
+//   // There was a connection error of some sort
+// };
+$.ajax({
+  method: 'POST',
+  dataType: 'jsonp',
+  url: weatherAPI,
+  success: function() {
+    // weatherAPI = info;
+    console.log('fuck');
   }
-};
 
-request.onerror = function() {
-  // There was a connection error of some sort
-};
-
-request.send();
+});
