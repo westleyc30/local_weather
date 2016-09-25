@@ -37,7 +37,7 @@ $.ajax({
   method: 'POST',
   dataType: 'jsonp',
   url: weatherAPI,
-  success: function() {
+  success: function(info) {
     weatherAPI = info;
     console.log('fuck');
   }
