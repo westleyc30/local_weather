@@ -2,10 +2,11 @@
 var lat = '';
 var lon = '';
 var weatherAPI = '';
-var data;
 
 // SELECTOR VARIABLES
 var elLocation = document.querySelector('#location');
+var elWeather = document.querySelector('#weather');
+var elTemperature = document.querySelector('#temperature');
 
 
 // LATITUDE AND LONGITUDE
@@ -15,31 +16,21 @@ if (navigator.geolocation) {
     lon = position.coords.longitude;
     weatherAPI = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat.toString() + '&lon=' + lon.toString() + '&appid=9fe1126f3544e9ea311e7312dca99844';
     elLocation.innerHTML ='latitude: ' + lat + ' ' + 'longitude: ' + lon;
+    sendRequest(weatherAPI);
   });
 }
-
-// var request = new XMLHttpRequest();
-// request.open('GET', weatherAPI, false);
-// request.send();
-// request = JSON.parse(request.response);
-// request.onload = function() {
-//   if (request.status >= 200 && request.status < 400) {
-//     // Success!
-//   } else {
-//     // We reached our target server, but it returned an error
-//   }
-// };
-//
-// request.onerror = function() {
-//   // There was a connection error of some sort
-// };
-$.ajax({
-  method: 'POST',
-  dataType: 'jsonp',
-  url: weatherAPI,
-  success: function(info) {
-    weatherAPI = info;
-    console.log('fuck');
-  }
-
-});
+function sendRequest(url) {
+  var request = new XMLHttpRequest ();
+  request.open('GET', url, true);
+  
+  request.onreadystatechange = function () {
+    if (request.readyState === 4 && request.status === 200) {
+      // SUCCESSFUL loading
+      var data = JSON.parse(request.responseText);
+      elTemperature.innerHTML = data.main.temp - 273.15;
+      elLocation.innerHTML = data.name;
+      elWeather.innerHTML = data.weather[0].main;
+    }
+  };
+  request.send();
+}
