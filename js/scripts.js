@@ -19,18 +19,27 @@ if (navigator.geolocation) {
     sendRequest(weatherAPI);
   });
 }
+
 function sendRequest(url) {
   var request = new XMLHttpRequest ();
   request.open('GET', url, true);
-  
   request.onreadystatechange = function () {
     if (request.readyState === 4 && request.status === 200) {
       // SUCCESSFUL loading
       var data = JSON.parse(request.responseText);
-      elTemperature.innerHTML = data.main.temp - 273.15;
-      elLocation.innerHTML = data.name;
-      elWeather.innerHTML = data.weather[0].main;
+      var weather = {};
+      weather.tempC = Math.round(data.main.temp - 273.15) + '&deg';
+      weather.tempF = Math.round(weather.tempC * (9 / 5) + 32) + '&deg';
+      weather.desc = data.weather[0].main;
+      weather.city = data.name;
+      update(weather);
     }
   };
   request.send();
+}
+
+function update(weather) {
+  elTemperature.innerHTML = weather.tempF;
+  elLocation.innerHTML = weather.city;
+  elWeather.innerHTML = weather.desc;
 }
