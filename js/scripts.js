@@ -4,6 +4,7 @@ var lon = '';
 var weatherAPI = '';
 var isCelcius;
 var weather = {};
+var locationURL = 'http://ipinfo.io/json?callback=JSON_CALLBACK';
 
 // SELECTOR VARIABLES
 var elLocation = document.querySelector('#location');
@@ -20,11 +21,11 @@ if (navigator.geolocation) {
     lat = position.coords.latitude;
     lon = position.coords.longitude;
     weatherAPI = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat.toString() + '&lon=' + lon.toString() + '&appid=9fe1126f3544e9ea311e7312dca99844';
-    sendRequest(weatherAPI);
+    sendRequestWeather(weatherAPI);
   });
 }
 
-function sendRequest(url) {
+function sendRequestWeather(url) {
   var request = new XMLHttpRequest ();
   request.open('GET', url, true);
   request.onreadystatechange = function () {
@@ -40,6 +41,7 @@ function sendRequest(url) {
   };
   request.send();
 }
+
 
 function toC(k) {
   return Math.round(k - 273.15) + '&deg' + 'C';
