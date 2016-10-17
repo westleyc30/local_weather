@@ -49,7 +49,8 @@ function sendRequestWeather(url) {
       var data = JSON.parse(request.responseText);
       weather.tempC = toC(data.main.temp);
       weather.tempF = toF(data.main.temp);
-      weather.desc = data.weather[0].main;
+      weather.main = data.weather[0].main;
+      weather.desc = data.weather[0].description;
       weather.city = data.name;
       update(weather);
     }
@@ -81,9 +82,16 @@ function update(weather) {
   elTemperature.innerHTML = weather.tempF;
   elLocation.innerHTML = weather.city;
   elWeather.innerHTML = weather.desc;
-  switch(weather.desc) {
+  switch(weather.main) {
 
     case 'Rain':
-      elSky.classList.add('sky-rain');
+      elSky.classList.add('sky-cloudy', 'rain');
+      break;
+    case 'Snow':
+      elSky.classList.add('sky-cloudy', 'snow');
+      break;
+    case 'Clouds':
+      elSky.classList.add('sky-cloudy');
+    
   }
 }
