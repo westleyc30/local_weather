@@ -4,13 +4,15 @@ var lon = '';
 var weatherAPI = '';
 var isCelcius;
 var weather = {};
-var locationURL = 'http://ipinfo.io/json?callback=JSON_CALLBACK';
+// var city;
+// var locationURL = 'http://ipinfo.io/json?callback=JSON_CALLBACK';
 
 // SELECTOR VARIABLES
 var elLocation = document.querySelector('#location');
 var elWeather = document.querySelector('#weather');
 var elTemperature = document.querySelector('#temperature');
 var elTempButton = document.querySelector('#tempButton');
+var elSky = document.querySelector('#sky');
 
 elTempButton.onclick = degreeSwap;
 
@@ -24,6 +26,19 @@ if (navigator.geolocation) {
     sendRequestWeather(weatherAPI);
   });
 }
+// function getLocation(url) {
+//   var request = new XMLHttpRequest ();
+//   request.open('GET',url, true);
+//   request.onreadystatechange = function () {
+//     if (request.readyState === 4 && request.status === 200) {
+//       var data = JSON.parse(request.responseText);
+//       city = data.city;
+//     }
+//   };
+//   request.send();
+// }
+
+// getLocation(locationURL);
 
 function sendRequestWeather(url) {
   var request = new XMLHttpRequest ();
@@ -66,4 +81,9 @@ function update(weather) {
   elTemperature.innerHTML = weather.tempF;
   elLocation.innerHTML = weather.city;
   elWeather.innerHTML = weather.desc;
+  switch(weather.desc) {
+
+    case 'Rain':
+      elSky.classList.add('sky-rain');
+  }
 }
