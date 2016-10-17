@@ -13,6 +13,7 @@ var elWeather = document.querySelector('#weather');
 var elTemperature = document.querySelector('#temperature');
 var elTempButton = document.querySelector('#tempButton');
 var elSky = document.querySelector('#sky');
+var elGround = document.querySelector('#ground');
 
 elTempButton.onclick = degreeSwap;
 
@@ -92,6 +93,7 @@ function update(weather) {
       break;
     case 'Clouds':
       elSky.classList.add('sky-cloudy');
+      elGround.classList.add('ground-cloudy');
     
   }
 }
