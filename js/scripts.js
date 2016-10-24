@@ -84,7 +84,7 @@ function createRain(dropSize, interval) {
   var canvas = document.getElementById('sky');
   var ctx = canvas.getContext('2d');
   var W = window.innerWidth;
-  var H = window.innerHeight;
+  var H = window.innerHeight / 2 ;
   
   canvas.width = W;
   canvas.height = H;
