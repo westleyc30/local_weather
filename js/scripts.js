@@ -6,7 +6,7 @@ var weatherAPI = '';
 var isCelcius;
 var weather = {};
 var city;
-var locationURL = 'http://ip-api.com/json/?callback=?';
+var locationURL = 'http://ip-api.com/json/?callback=';
 
 // SELECTOR VARIABLES
 var elLocation = document.querySelector('#location');
