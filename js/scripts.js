@@ -81,9 +81,15 @@ function createRain(dropSize, interval) {
   var ctx = canvas.getContext('2d');
   var W = window.innerWidth;
   var H = window.innerHeight / 2 ;
+  var gradientBackground = ctx.createLinearGradient(0,0,0,);
   
   canvas.width = W;
   canvas.height = H;
+
+  gradient.addColorStop(0,"#9FAAB6");
+  gradient.addColorStop(1,"#5C7894");
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0,0,W,H);
 
   var num = 200;
   var arr = [];
