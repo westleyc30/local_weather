@@ -79,7 +79,7 @@ function createRain(dropSize, interval) {
   var ctx = canvas.getContext('2d');
   var W = window.innerWidth;
   var H = window.innerHeight / 2 ;
-  var gradientBackground = ctx.createLinearGradient(0,H,0,0);
+  var gradientBackground = ctx.createLinearGradient(0,0,0,H);
   
   canvas.width = W;
   canvas.height = H;
