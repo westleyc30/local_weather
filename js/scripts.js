@@ -19,15 +19,6 @@ var elGround = document.querySelector('#ground');
 elTempButton.onclick = degreeSwap;
 
 
-// LATITUDE AND LONGITUDE
-// if (navigator.geolocation) {
-//   navigator.geolocation.getCurrentPosition(function(position){
-//     lat = position.coords.latitude;
-//     lon = position.coords.longitude;
-//     weatherAPI = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat.toString() + '&lon=' + lon.toString() + '&appid=9fe1126f3544e9ea311e7312dca99844';
-//     sendRequestWeather(weatherAPI);
-//   });
-// }
 function getLocation(url) {
   var request = new XMLHttpRequest ();
   request.open('GET', url, true);
@@ -134,7 +125,7 @@ function createRain(dropSize, interval) {
 function update(weather) {
   isCelcius = false;
   elTemperature.innerHTML = weather.tempF;
-  elLocation.innerHTML = weather.city;
+  elLocation.innerHTML = city;
   elWeather.innerHTML = weather.desc;
   switch(weather.main) {
   case 'Rain':
