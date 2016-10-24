@@ -84,11 +84,6 @@ function createRain(dropSize, interval) {
   canvas.width = W;
   canvas.height = H;
 
-  gradientBackground.addColorStop(0,'#9FAAB6');
-  gradientBackground.addColorStop(1,'#5C7894');
-  ctx.fillStyle = gradientBackground;
-  ctx.fillRect(0,0,W,H);
-
   var num = 200;
   var arr = [];
 
@@ -103,7 +98,11 @@ function createRain(dropSize, interval) {
   } // End for loop
 
   function raindrops() {
-    // ctx.clearRect(0,0,W,H);
+    ctx.clearRect(0,0,W,H);
+    gradientBackground.addColorStop(0,'#9FAAB6');
+    gradientBackground.addColorStop(1,'#5C7894');
+    ctx.fillStyle = gradientBackground;
+    ctx.fillRect(0,0,W,H);
     for(var i = 0; i < num; i++) {
       ctx.fillStyle = 'rgba(0, 51, 102,0.2)';
       ctx.fillRect(arr[i].x, arr[i].y, arr[i].w, arr[i].h);
