@@ -4,8 +4,8 @@ var lon = '';
 var weatherAPI = '';
 var isCelcius;
 var weather = {};
-// var city;
-// var locationURL = 'http://ipinfo.io/json?callback=JSON_CALLBACK';
+var city;
+var locationURL = 'http://ip-api.com/json/?callback=?';
 
 // SELECTOR VARIABLES
 var elLocation = document.querySelector('#location');
@@ -27,19 +27,19 @@ if (navigator.geolocation) {
     sendRequestWeather(weatherAPI);
   });
 }
-// function getLocation(url) {
-//   var request = new XMLHttpRequest ();
-//   request.open('GET',url, true);
-//   request.onreadystatechange = function () {
-//     if (request.readyState === 4 && request.status === 200) {
-//       var data = JSON.parse(request.responseText);
-//       city = data.city;
-//     }
-//   };
-//   request.send();
-// }
+function getLocation(url) {
+  var request = new XMLHttpRequest ();
+  request.open('GET', url, true);
+  request.onreadystatechange = function () {
+    if (request.readyState === 4 && request.status === 200) {
+      var data = JSON.parse(request.responseText);
+      city = data.city;
+    }
+  };
+  request.send();
+}
 
-// getLocation(locationURL);
+getLocation(locationURL);
 
 function sendRequestWeather(url) {
   var request = new XMLHttpRequest ();
@@ -78,22 +78,72 @@ function degreeSwap() {
   }
 }
 
+
+// var speed = 5;
+function createRain(dropSize, interval) {
+  var canvas = document.getElementById('sky');
+  var ctx = canvas.getContext('2d');
+  var W = window.innerWidth;
+  var H = window.innerHeight / 2;
+  
+  canvas.width = W;
+  canvas.height = H;
+
+  var num = 200;
+  var arr = [];
+
+  for (var i = 0; i < num; i++) {
+    arr.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      w: 2,
+      h: Math.random() * 30,
+      s: Math.random() * 10 + 2
+    });
+  } // End for loop
+
+  function raindrops() {
+    ctx.clearRect(0,0,W,H);
+    for(var i = 0; i < num; i++) {
+      ctx.fillStyle = 'rgba(0, 51, 102,0.2)';
+      ctx.fillRect(arr[i].x, arr[i].y, arr[i].w, arr[i].h);
+    }
+
+    makeItRain();
+
+  }
+  function makeItRain() {
+    for(var i = 0; i< num; i++){ 
+      arr[i].y += arr[i].s;
+      if(arr[i].y > H){
+        arr[i].y =- arr[i].h;
+      }
+    }
+  }
+  setInterval(raindrops, interval);
+}//End createRain Function
+
+  
+
+
 function update(weather) {
   isCelcius = false;
   elTemperature.innerHTML = weather.tempF;
   elLocation.innerHTML = weather.city;
   elWeather.innerHTML = weather.desc;
   switch(weather.main) {
-
-    case 'Rain':
-      elSky.classList.add('sky-cloudy', 'rain');
-      break;
-    case 'Snow':
-      elSky.classList.add('sky-cloudy', 'snow');
-      break;
-    case 'Clouds':
-      elSky.classList.add('sky-cloudy');
-      elGround.classList.add('ground-cloudy');
+  case 'Rain':
+    createRain(20,10);
+    break;
+  case 'Snow':
+    elSky.classList.add('sky-cloudy', 'snow');
+    break;
+  case 'Clouds':
+    elSky.classList.add('sky-cloudy');
+    elGround.classList.add('ground-cloudy');
     
   }
 }
+
+
+
