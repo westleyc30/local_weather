@@ -84,7 +84,7 @@ function createRain(dropSize, interval) {
   var canvas = document.getElementById('sky');
   var ctx = canvas.getContext('2d');
   var W = window.innerWidth;
-  var H = window.innerHeight / 2;
+  var H = window.innerHeight;
   
   canvas.width = W;
   canvas.height = H;
@@ -139,8 +139,7 @@ function update(weather) {
     elSky.classList.add('sky-cloudy', 'snow');
     break;
   case 'Clouds':
-    elSky.classList.add('sky-cloudy');
-    elGround.classList.add('ground-cloudy');
+
     
   }
 }

@@ -22,7 +22,7 @@ html {
   background: linear-gradient(#9FAAB6, #5C7894);
 } 
 .sky-style {
-  top: 0;
+  top: 100vh;
   left: 0;
 }
 /*.sky-cloudy {
