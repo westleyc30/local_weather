@@ -1,6 +1,7 @@
 // GLOBAL VARIABLES
 var lat = '';
 var lon = '';
+var latitude,longitude;
 var weatherAPI = '';
 var isCelcius;
 var weather = {};
@@ -19,14 +20,14 @@ elTempButton.onclick = degreeSwap;
 
 
 // LATITUDE AND LONGITUDE
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(function(position){
-    lat = position.coords.latitude;
-    lon = position.coords.longitude;
-    weatherAPI = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat.toString() + '&lon=' + lon.toString() + '&appid=9fe1126f3544e9ea311e7312dca99844';
-    sendRequestWeather(weatherAPI);
-  });
-}
+// if (navigator.geolocation) {
+//   navigator.geolocation.getCurrentPosition(function(position){
+//     lat = position.coords.latitude;
+//     lon = position.coords.longitude;
+//     weatherAPI = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat.toString() + '&lon=' + lon.toString() + '&appid=9fe1126f3544e9ea311e7312dca99844';
+//     sendRequestWeather(weatherAPI);
+//   });
+// }
 function getLocation(url) {
   var request = new XMLHttpRequest ();
   request.open('GET', url, true);
@@ -34,6 +35,10 @@ function getLocation(url) {
     if (request.readyState === 4 && request.status === 200) {
       var data = JSON.parse(request.responseText);
       city = data.city;
+      latitude = data.lat;
+      longitude = data.lon;
+      weatherAPI = 'http://api.openweathermap.org/data/2.5/weather?lat=' + latitude.toString() + '&lon=' + longitude.toString() + '&appid=9fe1126f3544e9ea311e7312dca99844';
+      sendRequestWeather(weatherAPI);
     }
   };
   request.send();
