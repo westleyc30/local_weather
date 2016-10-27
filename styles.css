@@ -17,20 +17,22 @@ html {
   left: 0;
   bottom: 0;
   right: 0;
-  background: -webkit-linear-gradient(#9FAAB6, #5C7894);
+  /*background: -webkit-linear-gradient(#9FAAB6, #5C7894);
   background: -o-linear-gradient(#9FAAB6, #5C7894);
-  background: linear-gradient(#9FAAB6, #5C7894);
-} 
-.sky-style {
+  background: linear-gradient(#9FAAB6, #5C7894);*/
+}
+/*.sky-style {
   top: 100vh;
   left: 0;
-}
+}*/
 /*.sky-cloudy {
   background: -webkit-linear-gradient(#9FAAB6, #5C7894);
   background: -o-linear-gradient(#9FAAB6, #5C7894);
   background: linear-gradient(#9FAAB6, #5C7894);
 }*/
 .ground-style {
+  z-index: -11;
+  position: absolute;
   top: 50vh;
   right: 0;
   width: 100%;

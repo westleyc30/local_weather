@@ -78,9 +78,9 @@ function createRain(dropSize, interval) {
   var canvas = document.getElementById('sky');
   var ctx = canvas.getContext('2d');
   var W = window.innerWidth;
-  var H = window.innerHeight / 1.8 ;
-  var gradientBackground = ctx.createLinearGradient(0,0,0,H);
-  
+  var H = window.innerHeight;
+  // var gradientBackground = ctx.createLinearGradient(0,0,0,H);
+
   canvas.width = W;
   canvas.height = H;
 
@@ -99,10 +99,10 @@ function createRain(dropSize, interval) {
 
   function raindrops() {
     ctx.clearRect(0,0,W,H);
-    gradientBackground.addColorStop(0,'#9FAAB6');
-    gradientBackground.addColorStop(1,'#5C7894');
-    ctx.fillStyle = gradientBackground;
-    ctx.fillRect(0,0,W,H);
+    // gradientBackground.addColorStop(0,'#9FAAB6');
+    // gradientBackground.addColorStop(1,'#5C7894');
+    // ctx.fillStyle = gradientBackground;
+    // ctx.fillRect(0,0,W,H);
     for(var i = 0; i < num; i++) {
       ctx.fillStyle = 'rgba(0, 51, 102,0.2)';
       ctx.fillRect(arr[i].x, arr[i].y, arr[i].w, arr[i].h);
@@ -112,7 +112,7 @@ function createRain(dropSize, interval) {
 
   }
   function makeItRain() {
-    for(var i = 0; i< num; i++){ 
+    for(var i = 0; i< num; i++){
       arr[i].y += arr[i].s;
       if(arr[i].y > H){
         arr[i].y =- arr[i].h;
@@ -122,7 +122,7 @@ function createRain(dropSize, interval) {
   setInterval(raindrops, interval);
 }//End createRain Function
 
-  
+
 
 
 function update(weather) {
@@ -138,10 +138,8 @@ function update(weather) {
     elSky.classList.add('sky-cloudy', 'snow');
     break;
   case 'Clouds':
+    createRain(20,10);
+    break;
 
-    
   }
 }
-
-
-
