@@ -17,14 +17,16 @@ html {
   left: 0;
   bottom: 0;
   right: 0;
-  /*background: -webkit-linear-gradient(#9FAAB6, #5C7894);
-  background: -o-linear-gradient(#9FAAB6, #5C7894);
-  background: linear-gradient(#9FAAB6, #5C7894);*/
 }
-/*.sky-style {
-  top: 100vh;
+.sky-style {
+  top: 0;
   left: 0;
-}*/
+  height: 50vh;
+  width: 100vw;
+  background: -webkit-linear-gradient(#9FAAB6, #5C7894);
+  background: -o-linear-gradient(#9FAAB6, #5C7894);
+  background: linear-gradient(#9FAAB6, #5C7894);
+}
 /*.sky-cloudy {
   background: -webkit-linear-gradient(#9FAAB6, #5C7894);
   background: -o-linear-gradient(#9FAAB6, #5C7894);
