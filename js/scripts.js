@@ -13,6 +13,7 @@ var elTemperature = document.querySelector('#temperature');
 var elTempButton = document.querySelector('#tempButton');
 var elSky = document.querySelector('#sky');
 var elGround = document.querySelector('#ground');
+var sheet = document.styleSheets[0];
 
 elTempButton.onclick = degreeSwap;
 
@@ -74,57 +75,58 @@ function degreeSwap() {
 
 
 // var speed = 5;
-function createRain(dropSize, interval) {
-  var canvas = document.getElementById('sky');
-  var ctx = canvas.getContext('2d');
-  var W = window.innerWidth;
-  var H = window.innerHeight;
-  // var gradientBackground = ctx.createLinearGradient(0,0,0,H);
-
-  canvas.width = W;
-  canvas.height = H;
-
-  var num = 200;
-  var arr = [];
-
-  for (var i = 0; i < num; i++) {
-    arr.push({
-      x: Math.random() * W,
-      y: Math.random() * H,
-      w: 2,
-      h: Math.random() * 30,
-      s: Math.random() * 10 + 2
-    });
-  } // End for loop
-
-  function raindrops() {
-    ctx.clearRect(0,0,W,H);
-    // gradientBackground.addColorStop(0,'#9FAAB6');
-    // gradientBackground.addColorStop(1,'#5C7894');
-    // ctx.fillStyle = gradientBackground;
-    // ctx.fillRect(0,0,W,H);
-    for(var i = 0; i < num; i++) {
-      ctx.fillStyle = 'rgba(0, 51, 102,0.2)';
-      ctx.fillRect(arr[i].x, arr[i].y, arr[i].w, arr[i].h);
-    }
-
-    makeItRain();
-
-  }
-  function makeItRain() {
-    for(var i = 0; i< num; i++){
-      arr[i].y += arr[i].s;
-      if(arr[i].y > H){
-        arr[i].y =- arr[i].h;
-      }
-    }
-  }
-  setInterval(raindrops, interval);
-}//End createRain Function
-
-
+// function createRain(dropSize, interval) {
+//   var canvas = document.getElementById('sky');
+//   var ctx = canvas.getContext('2d');
+//   var W = window.innerWidth;
+//   var H = window.innerHeight;
+//   // var gradientBackground = ctx.createLinearGradient(0,0,0,H);
+//
+//   canvas.width = W;
+//   canvas.height = H;
+//
+//   var num = 200;
+//   var arr = [];
+//
+//   for (var i = 0; i < num; i++) {
+//     arr.push({
+//       x: Math.random() * W,
+//       y: Math.random() * H,
+//       w: 2,
+//       h: Math.random() * 30,
+//       s: Math.random() * 10 + 2
+//     });
+//   } // End for loop
+//
+//   function raindrops() {
+//     ctx.clearRect(0,0,W,H);
+//     // gradientBackground.addColorStop(0,'#9FAAB6');
+//     // gradientBackground.addColorStop(1,'#5C7894');
+//     // ctx.fillStyle = gradientBackground;
+//     // ctx.fillRect(0,0,W,H);
+//     for(var i = 0; i < num; i++) {
+//       ctx.fillStyle = 'rgba(0, 51, 102,0.2)';
+//       ctx.fillRect(arr[i].x, arr[i].y, arr[i].w, arr[i].h);
+//     }
+//
+//     makeItRain();
+//
+//   }
+//   function makeItRain() {
+//     for(var i = 0; i< num; i++){
+//       arr[i].y += arr[i].s;
+//       if(arr[i].y > H){
+//         arr[i].y =- arr[i].h;
+//       }
+//     }
+//   }
+//   setInterval(raindrops, interval);
+// }//End createRain Function
 
 
+
+// NEED TO MAKE DIFFERENT BACKGROUNDS
+// THEN DIFFERENT FOLDERS WITH BACKGROUNDS FOR DIFFERENT WEATHER TYPES
 function update(weather) {
   isCelcius = false;
   elTemperature.innerHTML = weather.tempF;
@@ -132,14 +134,17 @@ function update(weather) {
   elWeather.innerHTML = weather.desc;
   switch(weather.main) {
   case 'Rain':
-    createRain(20,10);
+    // createRain(20,10);
+    sheet.insertRule('html {background:url(img/rain.jpg) no-repeat center center fixed;-webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover;background-size: cover;}', 1);
     break;
   case 'Snow':
-    elSky.classList.add('sky-cloudy', 'snow');
+    sheet.insertRule('html {background:url(img/snow.jpg) no-repeat center center fixed;-webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover;background-size: cover;}', 1);
     break;
   case 'Clouds':
-    createRain(20,10);
+    sheet.insertRule('html {background:url(img/cloudy.jpg) no-repeat center center fixed;-webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover;background-size: cover;}', 1);
+    // createRain(20,10);
     break;
-
+  case 'Clear':
+    sheet.insertRule('html {background:url(img/clear.jpg) no-repeat center center fixed;-webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover;background-size: cover;}', 1);
   }
 }
